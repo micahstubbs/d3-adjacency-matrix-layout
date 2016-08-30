@@ -16,8 +16,13 @@ export default function () {
     // const constructedMatrix = [];
     const matrix = [];
     const edgeHash = {};
-    const xScale = d3.scale.linear().domain([0, nodes.length]).range([0, width]);
-    const yScale = d3.scale.linear().domain([0, nodes.length]).range([0, height]);
+    const xScale = d3.scaleLinear()
+      .domain([0, nodes.length])
+      .range([0, width]);
+
+    const yScale = d3.scaleLinear()
+      .domain([0, nodes.length])
+      .range([0, height]);
 
     nodes.forEach((node, i) => {
       node.sortedIndex = i;
@@ -135,33 +140,37 @@ export default function () {
   };
 
   matrix.xAxis = calledG => {
-    const nameScale = d3.scale.ordinal()
-    .domain(nodes.map(nodeID))
-    .rangePoints([0, size[0]], 1);
+    const nameScale = d3.scalePoint()
+      .domain(nodes.map(nodeID))
+      .range([0, size[0]])
+      .padding(1);
 
-    const xAxis = d3.svg.axis().scale(nameScale).orient('top').tickSize(4);
+    const xAxis = d3.axisTop()
+      .scale(nameScale)
+      .tickSize(4);
 
     calledG
-    .append('g')
-    .attr('class', 'am-xAxis am-axis')
-    .call(xAxis)
-    .selectAll('text')
-    .style('text-anchor', 'end')
-    .attr('transform', 'translate(-10,-10) rotate(90)');
+      .append('g')
+      .attr('class', 'am-xAxis am-axis')
+      .call(xAxis)
+      .selectAll('text')
+      .style('text-anchor', 'end')
+      .attr('transform', 'translate(-10,-10) rotate(90)');
   };
 
   matrix.yAxis = calledG => {
-    const nameScale = d3.scale.ordinal()
-    .domain(nodes.map(nodeID))
-    .rangePoints([0, size[1]], 1);
+    const nameScale = d3.scalePoint()
+      .domain(nodes.map(nodeID))
+      .range([0, size[1]])
+      .padding(1);
 
-    const yAxis = d3.svg.axis().scale(nameScale)
-    .orient('left')
-    .tickSize(4);
+    const yAxis = d3.axisLeft()
+      .scale(nameScale)
+      .tickSize(4);
 
     calledG.append('g')
-    .attr('class', 'am-yAxis am-axis')
-    .call(yAxis);
+      .attr('class', 'am-yAxis am-axis')
+      .call(yAxis);
   };
 
   return matrix;

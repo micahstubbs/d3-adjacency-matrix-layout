@@ -6,27 +6,27 @@
 }(this, function (exports) { 'use strict';
 
   function d3AdjacencyMatrixLayout () {
-    var directed = true,
-        size = [1, 1],
-        nodes = [],
-        edges = [],
-        edgeWeight = function edgeWeight(d) {
+    var directed = true;
+    var size = [1, 1];
+    var nodes = [];
+    var edges = [];
+    var edgeWeight = function edgeWeight(d) {
       return 1;
-    },
-        nodeID = function nodeID(d) {
+    };
+    var nodeID = function nodeID(d) {
       return d.id;
     };
 
     function matrix() {
-      var width = size[0],
-          height = size[1],
-          nodeWidth = width / nodes.length,
-          nodeHeight = height / nodes.length,
-          constructedMatrix = [],
-          matrix = [],
-          edgeHash = {},
-          xScale = d3.scale.linear().domain([0, nodes.length]).range([0, width]),
-          yScale = d3.scale.linear().domain([0, nodes.length]).range([0, height]);
+      var width = size[0];
+      var height = size[1];
+      var nodeWidth = width / nodes.length;
+      var nodeHeight = height / nodes.length;
+      var constructedMatrix = [];
+      var matrix = [];
+      var edgeHash = {};
+      var xScale = d3.scale.linear().domain([0, nodes.length]).range([0, width]);
+      var yScale = d3.scale.linear().domain([0, nodes.length]).range([0, height]);
 
       nodes.forEach(function (node, i) {
         node.sortedIndex = i;

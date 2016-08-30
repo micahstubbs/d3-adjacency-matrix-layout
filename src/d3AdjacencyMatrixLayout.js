@@ -133,7 +133,7 @@ export default function () {
     .domain(nodes.map(nodeID))
     .rangePoints([0,size[1]],1);
 
-    yAxis = d3.svg.axis().scale(nameScale)
+    var yAxis = d3.svg.axis().scale(nameScale)
     .orient("left")
     .tickSize(4);
 

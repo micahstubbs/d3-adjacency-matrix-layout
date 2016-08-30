@@ -1,9 +1,9 @@
 // https://github.com/micahstubbs/d3-adjacency-matrix-layout Version 1.0.0. Copyright 2016 @micahstubbs.
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.d3AdjacencyMatrixLayout = global.d3AdjacencyMatrixLayout || {})));
-}(this, function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'd3'], factory) :
+  (factory((global.d3AdjacencyMatrixLayout = global.d3AdjacencyMatrixLayout || {}),global.d3));
+}(this, function (exports,d3) { 'use strict';
 
   function d3AdjacencyMatrixLayout () {
     var directed = true;
@@ -22,7 +22,7 @@
       var height = size[1];
       var nodeWidth = width / nodes.length;
       var nodeHeight = height / nodes.length;
-      var constructedMatrix = [];
+      // const constructedMatrix = [];
       var matrix = [];
       var edgeHash = {};
       var xScale = d3.scale.linear().domain([0, nodes.length]).range([0, width]);
@@ -33,17 +33,21 @@
       });
 
       edges.forEach(function (edge) {
-        var constructedEdge = { source: edge.source, target: edge.target, weight: edgeWeight(edge) };
-        if (typeof edge.source == "number") {
+        var constructedEdge = {
+          source: edge.source,
+          target: edge.target,
+          weight: edgeWeight(edge)
+        };
+        if (typeof edge.source === 'number') {
           constructedEdge.source = nodes[edge.source];
         }
-        if (typeof edge.target == "number") {
+        if (typeof edge.target === 'number') {
           constructedEdge.target = nodes[edge.target];
         }
-        var id = nodeID(constructedEdge.source) + "-" + nodeID(constructedEdge.target);
+        var id = nodeID(constructedEdge.source) + '-' + nodeID(constructedEdge.target);
 
         if (directed === false && constructedEdge.source.sortedIndex < constructedEdge.target.sortedIndex) {
-          id = nodeID(constructedEdge.target) + "-" + nodeID(constructedEdge.source);
+          id = nodeID(constructedEdge.target) + '-' + nodeID(constructedEdge.source);
         }
         if (!edgeHash[id]) {
           edgeHash[id] = constructedEdge;
@@ -52,20 +56,38 @@
         }
       });
 
-      console.log("nodes", nodes, nodes.length);
+      console.log('nodes', nodes, nodes.length);
 
       nodes.forEach(function (sourceNode, a) {
         nodes.forEach(function (targetNode, b) {
-          var grid = { id: nodeID(sourceNode) + "-" + nodeID(targetNode), source: sourceNode, target: targetNode, x: xScale(b), y: yScale(a), weight: 0, height: nodeHeight, width: nodeWidth };
+          var grid = {
+            id: nodeID(sourceNode) + '-' + nodeID(targetNode),
+            source: sourceNode,
+            target: targetNode,
+            x: xScale(b),
+            y: yScale(a),
+            weight: 0,
+            height: nodeHeight,
+            width: nodeWidth
+          };
           var edgeWeight = 0;
           if (edgeHash[grid.id]) {
             edgeWeight = edgeHash[grid.id].weight;
             grid.weight = edgeWeight;
-          };
+          }
           if (directed === true || b < a) {
             matrix.push(grid);
             if (directed === false) {
-              var mirrorGrid = { id: nodeID(sourceNode) + "-" + nodeID(targetNode), source: sourceNode, target: targetNode, x: xScale(a), y: yScale(b), weight: 0, height: nodeHeight, width: nodeWidth };
+              var mirrorGrid = {
+                id: nodeID(sourceNode) + '-' + nodeID(targetNode),
+                source: sourceNode,
+                target: targetNode,
+                x: xScale(a),
+                y: yScale(b),
+                weight: 0,
+                height: nodeHeight,
+                width: nodeWidth
+              };
               mirrorGrid.weight = edgeWeight;
               matrix.push(mirrorGrid);
             }
@@ -73,7 +95,7 @@
         });
       });
 
-      console.log("matrix", matrix, matrix.length);
+      console.log('matrix', matrix, matrix.length);
 
       return matrix;
     }
@@ -104,7 +126,7 @@
 
     matrix.edgeWeight = function (x) {
       if (!arguments.length) return edgeWeight;
-      if (typeof x === "function") {
+      if (typeof x === 'function') {
         edgeWeight = x;
       } else {
         edgeWeight = function edgeWeight() {
@@ -116,7 +138,7 @@
 
     matrix.nodeID = function (x) {
       if (!arguments.length) return nodeID;
-      if (typeof x === "function") {
+      if (typeof x === 'function') {
         nodeID = x;
       }
       return matrix;
@@ -125,17 +147,17 @@
     matrix.xAxis = function (calledG) {
       var nameScale = d3.scale.ordinal().domain(nodes.map(nodeID)).rangePoints([0, size[0]], 1);
 
-      var xAxis = d3.svg.axis().scale(nameScale).orient("top").tickSize(4);
+      var xAxis = d3.svg.axis().scale(nameScale).orient('top').tickSize(4);
 
-      calledG.append("g").attr("class", "am-xAxis am-axis").call(xAxis).selectAll("text").style("text-anchor", "end").attr("transform", "translate(-10,-10) rotate(90)");
+      calledG.append('g').attr('class', 'am-xAxis am-axis').call(xAxis).selectAll('text').style('text-anchor', 'end').attr('transform', 'translate(-10,-10) rotate(90)');
     };
 
     matrix.yAxis = function (calledG) {
       var nameScale = d3.scale.ordinal().domain(nodes.map(nodeID)).rangePoints([0, size[1]], 1);
 
-      var yAxis = d3.svg.axis().scale(nameScale).orient("left").tickSize(4);
+      var yAxis = d3.svg.axis().scale(nameScale).orient('left').tickSize(4);
 
-      calledG.append("g").attr("class", "am-yAxis am-axis").call(yAxis);
+      calledG.append('g').attr('class', 'am-yAxis am-axis').call(yAxis);
     };
 
     return matrix;

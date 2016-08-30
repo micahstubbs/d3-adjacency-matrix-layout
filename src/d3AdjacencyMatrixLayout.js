@@ -13,7 +13,7 @@ export default function () {
     const height = size[1];
     const nodeWidth = width / nodes.length;
     const nodeHeight = height / nodes.length;
-    const constructedMatrix = [];
+    // const constructedMatrix = [];
     const matrix = [];
     const edgeHash = {};
     const xScale = d3.scale.linear().domain([0, nodes.length]).range([0, width]);
@@ -24,22 +24,26 @@ export default function () {
     });
 
     edges.forEach(edge => {
-      const constructedEdge = { source: edge.source, target: edge.target, weight: edgeWeight(edge) };
-      if (typeof edge.source == 'number') {
+      const constructedEdge = {
+        source: edge.source,
+        target: edge.target,
+        weight: edgeWeight(edge)
+      };
+      if (typeof edge.source === 'number') {
         constructedEdge.source = nodes[edge.source];
       }
-      if (typeof edge.target == 'number') {
+      if (typeof edge.target === 'number') {
         constructedEdge.target = nodes[edge.target];
       }
       let id = `${nodeID(constructedEdge.source)}-${nodeID(constructedEdge.target)}`;
 
-      if (directed === false && constructedEdge.source.sortedIndex < constructedEdge.target.sortedIndex) {
+      if (directed === false &&
+        constructedEdge.source.sortedIndex < constructedEdge.target.sortedIndex) {
         id = `${nodeID(constructedEdge.target)}-${nodeID(constructedEdge.source)}`;
       }
       if (!edgeHash[id]) {
         edgeHash[id] = constructedEdge;
-      }
-      else {
+      } else {
         edgeHash[id].weight = edgeHash[id].weight + constructedEdge.weight;
       }
     });
@@ -48,7 +52,16 @@ export default function () {
 
     nodes.forEach((sourceNode, a) => {
       nodes.forEach((targetNode, b) => {
-        const grid = { id: `${nodeID(sourceNode)}-${nodeID(targetNode)}`, source: sourceNode, target: targetNode, x: xScale(b), y: yScale(a), weight: 0, height: nodeHeight, width: nodeWidth };
+        const grid = {
+          id: `${nodeID(sourceNode)}-${nodeID(targetNode)}`,
+          source: sourceNode,
+          target: targetNode,
+          x: xScale(b),
+          y: yScale(a),
+          weight: 0,
+          height: nodeHeight,
+          width: nodeWidth
+        };
         let edgeWeight = 0;
         if (edgeHash[grid.id]) {
           edgeWeight = edgeHash[grid.id].weight;
@@ -57,7 +70,16 @@ export default function () {
         if (directed === true || b < a) {
           matrix.push(grid);
           if (directed === false) {
-            const mirrorGrid = { id: `${nodeID(sourceNode)}-${nodeID(targetNode)}`, source: sourceNode, target: targetNode, x: xScale(a), y: yScale(b), weight: 0, height: nodeHeight, width: nodeWidth };
+            const mirrorGrid = {
+              id: `${nodeID(sourceNode)}-${nodeID(targetNode)}`,
+              source: sourceNode,
+              target: targetNode,
+              x: xScale(a),
+              y: yScale(b),
+              weight: 0,
+              height: nodeHeight,
+              width: nodeWidth
+            };
             mirrorGrid.weight = edgeWeight;
             matrix.push(mirrorGrid);
           }

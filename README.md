@@ -6,7 +6,7 @@ develop with [es2015](https://babeljs.io/docs/learn-es2015/) then run `npm run p
 to build an [es5](https://es5.github.io/) [Javascript](https://en.wikipedia.org/wiki/JavaScript) todays-browsers-friendly bundle at 
 [build/d3-adjacency-matrix-layout.js](build/d3-adjacency-matrix-layout.js)
 
-#### API Reference
+### API Reference
 
 **matrix.size** An array of [width, height] that is used to calculate grid x, y, height and width.
 

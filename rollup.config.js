@@ -9,5 +9,5 @@ export default {
   },
   moduleName: 'd3AdjacencyMatrixLayout',
   plugins: [ json(), babel() ],
-  dest: 'build/bundle.js'
+  dest: 'build/d3-adjacency-matrix-layout.js'
 };

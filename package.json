@@ -2,10 +2,10 @@
   "name": "d3-ajacency-matrix-layout",
   "version": "1.0.0",
   "description": "a d3 ajacency matrix layout",
-  "main": "build/bundle.js",
+  "main": "build/d3-adjacency-matrix-layout.js",
   "scripts": {
     "prepublish": "rm -rf build && mkdir build && rollup -c --banner \"$(preamble)\" -- index.js",
-    "test": "rm -rf build && mkdir build && rollup -c --banner \"$(preamble)\" -- index.js && cp build/bundle.js ~/workspace/d3-adjacency-layout-example-project/02-v3-es2015-bundle && cp build/bundle.js ~/workspace/d3-adjacency-layout-example-project/03-v4-es2015-bundle",
+    "test": "rm -rf build && mkdir build && rollup -c --banner \"$(preamble)\" -- index.js && cp build/d3-adjacency-matrix-layout.js ~/workspace/d3-adjacency-layout-example-project/03-v4-es2015-bundle/",
     "lint": "eslint index.js src --fix"
   },
   "repository": {

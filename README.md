@@ -4,6 +4,8 @@ a [d3 version 4](https://github.com/d3/d3/blob/master/API.md) port of the [adjac
 
 develop with [es2015](https://babeljs.io/docs/learn-es2015/) then bundle and transpile to todays-browsers-friendly [es5](https://es5.github.io/) [Javascript](https://en.wikipedia.org/wiki/JavaScript) with the command `npm run prepublish`  
 
+### Download
+
 [build/d3-adjacency-matrix-layout.js](build/d3-adjacency-matrix-layout.js)
 
 ### API Reference

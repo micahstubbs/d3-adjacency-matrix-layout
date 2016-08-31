@@ -29,4 +29,4 @@ develop with [es2015](https://babeljs.io/docs/learn-es2015/) then bundle and tra
 
 **matrix.directed** Set to false if you want to mirror undirected networks.
 
-[![d3-adjacency-matrix example](http://i.imgur.com/CV7rmFs.png)](http://bl.ocks.org/micahstubbs/7f360cc66abfa28b400b96bc75b8984e)
+[![d3-adjacency-matrix example](http://i.imgur.com/FSzNmgd.png)](http://bl.ocks.org/micahstubbs/7f360cc66abfa28b400b96bc75b8984e)

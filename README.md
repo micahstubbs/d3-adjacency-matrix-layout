@@ -2,6 +2,8 @@
 
 a [d3 version 4](https://github.com/d3/d3/blob/master/API.md) port of the [adjacencyMatrix](https://github.com/emeeks/d3-plugins/tree/master/adjacencyMatrix) d3-plugin from [@Elijah_Meeks](https://twitter.com/elijah_meeks) 
 
+see the layout in use at [http://bl.ocks.org/micahstubbs/7f360cc66abfa28b400b96bc75b8984e](http://bl.ocks.org/micahstubbs/7f360cc66abfa28b400b96bc75b8984e)  
+
 develop with [es2015](https://babeljs.io/docs/learn-es2015/) then bundle and transpile to todays-browsers-friendly [es5](https://es5.github.io/) [Javascript](https://en.wikipedia.org/wiki/JavaScript) with the command  
 `npm run prepublish`  
 
@@ -26,3 +28,5 @@ develop with [es2015](https://babeljs.io/docs/learn-es2015/) then bundle and tra
 **matrix.yAxis** Cannot be set. Call this from the same place where you've put your matrix cells and it will build a simple vertical axis with labels from your node id.
 
 **matrix.directed** Set to false if you want to mirror undirected networks.
+
+[![d3-adjacency-matrix example](http://i.imgur.com/CV7rmFs.png)](http://bl.ocks.org/micahstubbs/7f360cc66abfa28b400b96bc75b8984e)

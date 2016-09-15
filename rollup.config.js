@@ -7,7 +7,7 @@ export default {
   globals: {
     d3: 'd3'
   },
-  moduleName: 'd3AdjacencyMatrixLayout',
+  moduleName: 'd3',
   plugins: [ json(), babel() ],
   dest: 'build/d3-adjacency-matrix-layout.js'
 };

@@ -1,1 +1,1 @@
-export { default as d3AdjacencyMatrixLayout } from './src/d3AdjacencyMatrixLayout';
+export { default as adjacencyMatrixLayout } from './src/d3AdjacencyMatrixLayout';
